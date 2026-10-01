@@ -1,0 +1,41 @@
+[project]
+name = "uk-company-check"
+version = "1.0.0"
+description = "MCP server that turns the free Companies House API (official UK company registry) into agent tools: company search, profile + officers, filing history, SIC code lookup."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Recursa Foundry" }]
+keywords = ["mcp", "companies-house", "uk", "company-search", "kyb", "model-context-protocol", "agent-tools"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Office/Business",
+]
+dependencies = [
+  # The official Model Context Protocol Python SDK.
+  # Works with BOTH SDK generations (1.x FastMCP / 2.x MCPServer) — see server.py.
+  "mcp>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+uk-company-check = "uk_company_check.server:main"
+
+[project.urls]
+Homepage = "https://find-and-update.company-information.service.gov.uk/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/uk_company_check"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
